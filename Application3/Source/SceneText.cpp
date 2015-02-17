@@ -11,7 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include "collisionSphere.h"
-
+// TEST TEST TEST
 
 SceneText ::SceneText ()
 {
@@ -46,6 +46,8 @@ void SceneText ::Init()
 	isFixed = false;
 	LSPEED = 20.f;
 	lightOn = true;
+
+	// TEST TEST TEST
 
 	//Load vertex and fragment shaders
 	m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//Text.fragmentshader" );
@@ -114,7 +116,7 @@ void SceneText ::Init()
 	meshList[GEO_HEAD]->material.kSpecular.Set(0.4f, 0.4f, 0.4f);
 	meshList[GEO_HEAD]->material.kShininess = 5.f;
 
-	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("Lightball", Color(1, 1, 1), 10, 10, 1);
+	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("Lightball", Color(1, 1, 1), 10, 10, 1);// TEST TEST TEST
 
 	meshList[GEO_QUAD] = MeshBuilder::GenerateQuad("quad", Color(1, 1, 1), 1.f);
 	meshList[GEO_QUAD]->textureID = LoadTGA("Image//color2.tga");
@@ -152,7 +154,7 @@ void SceneText ::Init()
 	Player->setCOORD(1,1,1);
 	meshList[TELEPORTER] = MeshBuilder::GenerateOBJ("elevator", "OBJ//Elevator.obj");
 	meshList[TELEPORTER]->textureID = LoadTGA("Image//Elevator.tga");
-	cV[TELEPORTER] = new collisionSphere(2.f);
+	cV[TELEPORTER] = new collisionSphere(2.f);// TEST TEST TEST
 	Teleporter = ((collisionSphere*)cV[TELEPORTER]);
 	Teleporter->setCOORD(10,0,0);
 
@@ -188,7 +190,7 @@ void SceneText ::Update(double dt)
 	if (Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 
-	if (Application::IsKeyPressed('I'))
+	if (Application::IsKeyPressed('I'))// TEST TEST TEST
 		lights[0].position.z -= (float)(LSPEED * dt);
 	if (Application::IsKeyPressed('K'))
 		lights[0].position.z += (float)(LSPEED * dt);
@@ -221,7 +223,7 @@ void SceneText ::Update(double dt)
 	}
 
 
-	if (!isFixed)
+	if (!isFixed)// TEST TEST TEST
 	{
 	if (Application::IsKeyPressed('W'))
 	{
@@ -257,7 +259,7 @@ void SceneText ::Update(double dt)
 	{
 		Vector3 charMov;
 		Mtx44 charRotate;
-
+		// TEST TEST TEST
 		charMov.Set(0, 0, Player->getVelocity()*dt);
 		charRotate.SetToRotation(rotateCharacter, 0, 1, 0);
 		charMov = charRotate * charMov;
@@ -283,7 +285,7 @@ void SceneText ::Update(double dt)
 
 
 	if (Application::IsKeyPressed(VK_RIGHT))
-		rotateCharacter -= 5.f;
+		rotateCharacter -= 5.f;// TEST TEST TEST
 	else if (Application::IsKeyPressed(VK_LEFT))
 		rotateCharacter += 5.f;
 
@@ -319,7 +321,7 @@ void SceneText ::RenderMesh(Mesh *mesh, bool enableLight)
 	{
 		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);// TEST TEST TEST
 		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
 	}
 	else
@@ -346,7 +348,7 @@ void SceneText::RenderText(Mesh* mesh, std::string text, Color color)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
-	for(unsigned i = 0; i < text.length(); ++i)
+	for(unsigned i = 0; i < text.length(); ++i)// TEST TEST TEST
 	{
 		Mtx44 characterSpacing;
 		characterSpacing.SetToTranslation(i * 1.0f, 0, 0); //1.0f is the spacing of each character, you may change this value
@@ -367,7 +369,7 @@ void SceneText::RenderTextOnScreen(Mesh* mesh, std::string text,Color color,  fl
 	
 	glDisable(GL_DEPTH_TEST);
 
-	Mtx44 ortho;
+	Mtx44 ortho;// TEST TEST TEST
 	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
 	projectionStack.PushMatrix();
 	projectionStack.LoadMatrix(ortho);
@@ -403,7 +405,7 @@ void SceneText::RenderImageOnScreen(Mesh* mesh, float size, float x, float y)
 void SceneText ::RenderSkybox()
 {
 	modelStack.PushMatrix();
-	//scale, translate, rotate
+	//scale, translate, rotate// TEST TEST TEST
 	modelStack.Translate(0,0,-0.498);
 	modelStack.Rotate(-90,0,0,1);
 	RenderMesh(meshList[GEO_FRONT], false);
@@ -436,7 +438,7 @@ void SceneText ::RenderSkybox()
 	RenderMesh(meshList[GEO_RIGHT], false);
 	modelStack.PopMatrix();
 
-	modelStack.PushMatrix();
+	modelStack.PushMatrix();// TEST TEST TEST
 	//scale, translate, rotate
 	modelStack.Translate(0,-0.498,0);
 	modelStack.Rotate(90,1,0,0);
@@ -457,7 +459,7 @@ void SceneText ::RenderSkybox()
 	modelStack.Translate(0,0.2,0);
 	RenderMesh(meshList[GEO_TOP], false);
 	modelStack.PopMatrix();
-
+	// TEST TEST TEST
 	
 
 	modelStack.PushMatrix();
@@ -493,7 +495,7 @@ void SceneText ::Render()
 	if (lights[0].type == Light::LIGHT_DIRECTIONAL)
 	{
 		Vector3 lightDir(lights[0].position.x, lights[0].position.y, lights[0].position.z);
-		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+		Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;// TEST TEST TEST
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 	}
 	else if (lights[0].type == Light::LIGHT_SPOT)
@@ -514,7 +516,7 @@ void SceneText ::Render()
 	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 
 	RenderMesh(meshList[GEO_AXES], false);
-
+	// TEST TEST TEST
 	modelStack.PushMatrix();
 	modelStack.Translate(lights[0].position.x, lights[0].position.y, lights[0].position.z);
 	RenderMesh(meshList[GEO_LIGHTBALL], lightOn);
