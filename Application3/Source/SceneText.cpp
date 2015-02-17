@@ -11,8 +11,6 @@
 #include <iostream>
 #include <sstream>
 #include "collisionSphere.h"
-// TEST TEST TEST
-//DOUBLE TEST, YOU COCKBAG
 
 SceneText ::SceneText ()
 {
@@ -152,10 +150,12 @@ void SceneText ::Init()
 	Player = ((collisionSphere*)(cV[GEO_MODEL4]));
 	Player->setVelocity(5);
 	Player->setCOORD(0,0,0);
-	Player->setCOORD(1,1,1);
+
+
+
 	meshList[TELEPORTER] = MeshBuilder::GenerateOBJ("elevator", "OBJ//Elevator.obj");
 	meshList[TELEPORTER]->textureID = LoadTGA("Image//Elevator.tga");
-	cV[TELEPORTER] = new collisionSphere(2.f);// TEST TEST TEST
+	cV[TELEPORTER] = new collisionSphere(0.5f);// TEST TEST TEST
 	Teleporter = ((collisionSphere*)cV[TELEPORTER]);
 	Teleporter->setCOORD(10,0,0);
 
@@ -541,6 +541,10 @@ void SceneText ::Render()
 	modelStack.Rotate(60 + rotateTele,0,1,0);
 	RenderMesh(meshList[TELEPORTER], false);
 	modelStack.PopMatrix();
+
+	
+
+
 }
 
 void SceneText ::Exit()
